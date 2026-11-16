@@ -1,0 +1,107 @@
+name: "battle.training controller test"
+description: "Test a battle.training controller with the ladder's own engine and optionally upload it on green"
+author: "sSenkuuu"
+branding:
+  icon: "zap"
+  color: "orange"
+
+inputs:
+  controller:
+    description: "Path to the controller file to test (e.g. controller.js)"
+    required: true
+    default: "controller.js"
+  seeds:
+    description: "Seeds per opponent (games = seeds x opponents x 2 sides)"
+    required: false
+    default: "10"
+  opponents:
+    description: "House bots to play, comma-separated"
+    required: false
+    default: "brawler,holder,random,hunter"
+  rules:
+    description: "Ruleset: s2 (default), s1, sub, urban, or a full version string"
+    required: false
+    default: "s2"
+  min-win-rate:
+    description: "Minimum overall win rate (%) to pass"
+    required: false
+    default: "50"
+  min-brawler:
+    description: "Minimum win rate (%) vs brawler to pass (arena target: 60)"
+    required: false
+    default: "60"
+  min-hunter:
+    description: "Minimum win rate (%) vs hunter to pass (arena target: 50)"
+    required: false
+    default: "50"
+  max-refused:
+    description: "Maximum refused orders per game allowed"
+    required: false
+    default: "20"
+  upload:
+    description: "Upload the controller as a new bot version if tests pass (true/false)"
+    required: false
+    default: "false"
+  bot:
+    description: "Bot name to upload to (required when upload is true)"
+    required: false
+    default: ""
+  label:
+    description: "Version label for the upload"
+    required: false
+    default: "v1"
+  api-key:
+    description: "battle.training API key (or set BT_API_KEY secret). Never printed."
+    required: false
+    default: ""
+
+outputs:
+  win-rate:
+    description: "Overall win rate (%) from the local test"
+    value: ${{ steps.test.outputs.win-rate }}
+  games:
+    description: "Number of games played"
+    value: ${{ steps.test.outputs.games }}
+  passed:
+    description: "'true' when all thresholds passed"
+    value: ${{ steps.test.outputs.passed }}
+  report-path:
+    description: "Path to the JSON report written by the test"
+    value: ${{ steps.test.outputs.report-path }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+    - name: Test controller
+      id: test
+      shell: bash
+      env:
+        BT_API_KEY: ${{ inputs.api-key }}
+        BT_REPORT: ${{ runner.temp }}/bt-report.json
+      run: |
+        ARGS=(
+          "${{ github.action_path }}/scripts/bt-ci.mjs" "${{ inputs.controller }}"
+          --seeds "${{ inputs.seeds }}"
+          --vs "${{ inputs.opponents }}"
+          --rules "${{ inputs.rules }}"
+          --min-win-rate "${{ inputs.min-win-rate }}"
+          --min-brawler "${{ inputs.min-brawler }}"
+          --min-hunter "${{ inputs.min-hunter }}"
+          --max-refused "${{ inputs.max-refused }}"
+          --sdk-dir "${{ runner.temp }}/bt-sdk"
+          --download-sdk
+          --report "${{ runner.temp }}/bt-report.json"
+          --summary "${{ runner.temp }}/bt-summary.md"
+        )
+        if [ "${{ inputs.upload }}" = "true" ]; then
+          ARGS+=(--upload --bot "${{ inputs.bot }}" --label "${{ inputs.label }}")
+        fi
+        node "${ARGS[@]}"
+        echo "win-rate=$(node -p "JSON.parse(require('fs').readFileSync(process.env.BT_REPORT,'utf8')).winRate")" >> "$GITHUB_OUTPUT"
+        echo "games=$(node -p "JSON.parse(require('fs').readFileSync(process.env.BT_REPORT,'utf8')).games")" >> "$GITHUB_OUTPUT"
+        echo "passed=$(node -p "JSON.parse(require('fs').readFileSync(process.env.BT_REPORT,'utf8')).passed")" >> "$GITHUB_OUTPUT"
+        echo "report-path=${{ runner.temp }}/bt-report.json" >> "$GITHUB_OUTPUT"

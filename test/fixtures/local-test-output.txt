@@ -1,0 +1,51 @@
+LOSS  vs brawler seed 2654435761 side 0  eliminated t=2955  dealt 161 taken 402  refused 0
+LOSS  vs brawler seed 2654435761 side 1  hill_locked t=4287  dealt  61 taken 324  refused 0
+WIN   vs brawler seed 1013904226 side 0  hill_locked t=4759  dealt 335 taken 296  refused 0
+WIN   vs brawler seed 1013904226 side 1  hill_locked t=4001  dealt 482 taken  16  refused 0
+LOSS  vs brawler seed 3668339987 side 0  hill_locked t=4319  dealt 290 taken 381  refused 0
+WIN   vs brawler seed 3668339987 side 1  hill_locked t=4441  dealt 341 taken  41  refused 0
+WIN   vs brawler seed 2027808452 side 0  hill_locked t=4721  dealt  72 taken 209  refused 0
+WIN   vs brawler seed 2027808452 side 1  hill_locked t=4721  dealt   0 taken 131  refused 0
+LOSS  vs brawler seed  387276917 side 0  eliminated t=1720  dealt 101 taken 441  refused 0
+WIN   vs brawler seed  387276917 side 1  hill_locked t=4721  dealt  29 taken 179  refused 0
+LOSS  vs holder  seed 2654435761 side 0  hill_locked t=4759  dealt 262 taken 111  refused 0
+LOSS  vs holder  seed 2654435761 side 1  hill_locked t=4705  dealt   6 taken   0  refused 0
+WIN   vs holder  seed 1013904226 side 0  hill_locked t=4328  dealt 251 taken  12  refused 0
+LOSS  vs holder  seed 1013904226 side 1  hill_locked t=4632  dealt  87 taken  83  refused 0
+LOSS  vs holder  seed 3668339987 side 0  eliminated t=2958  dealt 148 taken 472  refused 0
+LOSS  vs holder  seed 3668339987 side 1  hill_locked t=4473  dealt 271 taken 374  refused 0
+LOSS  vs holder  seed 2027808452 side 0  hill_locked t=4401  dealt 144 taken 153  refused 0
+WIN   vs holder  seed 2027808452 side 1  hill_locked t=4753  dealt  66 taken   4  refused 0
+WIN   vs holder  seed  387276917 side 0  hill_locked t=4681  dealt 150 taken 161  refused 0
+WIN   vs holder  seed  387276917 side 1  hill_locked t=4681  dealt 216 taken 148  refused 0
+WIN   vs random  seed 2654435761 side 0  hill_locked t=4401  dealt 253 taken 114  refused 0
+WIN   vs random  seed 2654435761 side 1  hill_locked t=4441  dealt 221 taken  48  refused 0
+WIN   vs random  seed 1013904226 side 0  hill_locked t=4321  dealt 417 taken  46  refused 0
+WIN   vs random  seed 1013904226 side 1  eliminated t=2228  dealt 493 taken   0  refused 0
+WIN   vs random  seed 3668339987 side 0  eliminated t= 593  dealt 432 taken  66  refused 0
+WIN   vs random  seed 3668339987 side 1  eliminated t=3967  dealt 450 taken 180  refused 0
+WIN   vs random  seed 2027808452 side 0  hill_locked t=4641  dealt 236 taken 143  refused 0
+WIN   vs random  seed 2027808452 side 1  hill_locked t=4531  dealt 347 taken 160  refused 0
+WIN   vs random  seed  387276917 side 0  eliminated t=1355  dealt 389 taken 145  refused 0
+WIN   vs random  seed  387276917 side 1  hill_locked t=4701  dealt 187 taken 206  refused 0
+LOSS  vs hunter  seed 2654435761 side 0  eliminated t=1865  dealt 158 taken 549  refused 0
+WIN   vs hunter  seed 2654435761 side 1  eliminated t=1650  dealt 484 taken 201  refused 0
+WIN   vs hunter  seed 1013904226 side 0  hill_locked t=4095  dealt 389 taken 312  refused 0
+WIN   vs hunter  seed 1013904226 side 1  hill_locked t=4481  dealt 290 taken 187  refused 0
+WIN   vs hunter  seed 3668339987 side 0  eliminated t=1197  dealt 525 taken 125  refused 0
+LOSS  vs hunter  seed 3668339987 side 1  eliminated t=1102  dealt 120 taken 560  refused 0
+WIN   vs hunter  seed 2027808452 side 0  hill_locked t=4800  dealt  91 taken 399  refused 0
+WIN   vs hunter  seed 2027808452 side 1  hill_locked t=4800  dealt 131 taken 300  refused 0
+LOSS  vs hunter  seed  387276917 side 0  eliminated t=3361  dealt 125 taken 486  refused 0
+WIN   vs hunter  seed  387276917 side 1  hill_locked t=3632  dealt 369 taken 144  refused 0
+
+=== summary ===
+games 40  W-L-D 27-13-0  win rate 67.5%  (376 ms/game)
+  vs brawler  6-4-0
+  vs holder   4-6-0
+  vs random   10-0-0
+  vs hunter   7-3-0
+damage dealt/taken per game 240/208   refused orders per game 0.0   tick errors 0 in 0/40 games   matches aborted 0
+replays verified 40/40
+draft: mbt + missile + drone + scout (your draft())
+rules s2.0.0 · local-test 1.2 · the ladder uses the same engine.

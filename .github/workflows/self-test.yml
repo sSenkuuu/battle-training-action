@@ -1,0 +1,39 @@
+# Self-test for this action repo: the action tests its own example bot.
+#
+# Runs on every push/PR. It exercises the action end to end against the
+# example controller in examples/ssenkuuu-bot (the ssenkuuu-bot v1
+# controller, 69.4% over 160 games at 20 seeds in local testing) with a
+# small seed count so the run stays fast.
+
+name: Self-test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test example controller with the action
+        id: bt
+        uses: ./
+        with:
+          controller: examples/ssenkuuu-bot/controller.js
+          seeds: 10
+          opponents: brawler,holder,random,hunter
+      - name: Check outputs
+        run: |
+          test "${{ steps.bt.outputs.passed }}" = "true"
+          echo "win rate ${{ steps.bt.outputs.win-rate }}% over ${{ steps.bt.outputs.games }} games"
+
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Unit + integration tests
+        run: node --test test/bt-ci.test.mjs
