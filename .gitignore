@@ -1,0 +1,4 @@
+.bt-sdk/
+report.json
+bt-report.json
+*.log
