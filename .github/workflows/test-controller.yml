@@ -1,0 +1,40 @@
+# Example: test a battle.training controller on every push and PR.
+#
+# Copy this file into your bot repo as .github/workflows/test-controller.yml
+# and point `uses:` at this action. The run fails if the controller drops
+# below the arena's targets (>60% vs brawler, >50% vs hunter) or if any
+# tick() throws — so a bad version never reaches the ladder.
+#
+# To auto-upload on green, add a BT_API_KEY repository secret and set
+# upload: true (see the commented block below). The upload only runs when
+# the tests pass, and the key is never printed in logs.
+
+name: Test controller
+
+on:
+  push:
+    paths:
+      - "controller.js"
+  pull_request:
+    paths:
+      - "controller.js"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test controller vs house bots
+        id: bt
+        uses: sSenkuuu/battle-training-action@v1
+        with:
+          controller: controller.js
+          seeds: 10
+          opponents: brawler,holder,random,hunter
+          # upload: true
+          # bot: ssenkuuu-bot
+          # label: v1
+          # api-key: ${{ secrets.BT_API_KEY }}
+      - name: Show result
+        run: echo "win rate ${{ steps.bt.outputs.win-rate }}% over ${{ steps.bt.outputs.games }} games (passed=${{ steps.bt.outputs.passed }})"
