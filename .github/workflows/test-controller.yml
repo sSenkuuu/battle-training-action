@@ -34,3 +34,7 @@ jobs:
           opponents: brawler,holder,random,hunter
           # upload: true
           # bot: ssenkuuu-bot
+          # label: v1
+          # api-key: ${{ secrets.BT_API_KEY }}
+      - name: Show result
+        run: echo "win rate ${{ steps.bt.outputs.win-rate }}% over ${{ steps.bt.outputs.games }} games (passed=${{ steps.bt.outputs.passed }})"
