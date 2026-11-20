@@ -14,10 +14,10 @@ name: Test controller
 on:
   push:
     paths:
-      - "controller.js"
+      - "examples/ssenkuuu-bot/controller.js"
   pull_request:
     paths:
-      - "controller.js"
+      - "examples/ssenkuuu-bot/controller.js"
   workflow_dispatch:
 
 jobs:
@@ -29,12 +29,8 @@ jobs:
         id: bt
         uses: sSenkuuu/battle-training-action@v1
         with:
-          controller: controller.js
+          controller: examples/ssenkuuu-bot/controller.js
           seeds: 10
           opponents: brawler,holder,random,hunter
           # upload: true
           # bot: ssenkuuu-bot
-          # label: v1
-          # api-key: ${{ secrets.BT_API_KEY }}
-      - name: Show result
-        run: echo "win rate ${{ steps.bt.outputs.win-rate }}% over ${{ steps.bt.outputs.games }} games (passed=${{ steps.bt.outputs.passed }})"
